@@ -3,4 +3,5 @@ This is a two-man project that recreates the infamous Space Invaders game using 
 
 ## Developers:
 -Ethan Stupin
+
 -Jared Pope
