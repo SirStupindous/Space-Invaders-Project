@@ -9,12 +9,12 @@ class Alien(Sprite):
     # for n in range(2):
     #     alien_images.append(pg.image.load(f'images/alien{n}.bmp'))
 
-    alien_images = [pg.image.load(f'images/alien{n}.bmp') for n in range(2)]
+    # alien_images = [pg.image.load(f'images/alien{n}.bmp') for n in range(2)]
 
-    alien_images0 = [pg.image.load(f'images/alien0{n}.bmp') for n in range(2)]
-    alien_images1 = [pg.image.load(f'images/alien1{n}.bmp') for n in range(2)]
-    alien_images2 = [pg.image.load(f'images/alien2{n}.bmp') for n in range(2)]
-    alien_images3 = [pg.image.load(f'images/alien3{n}.bmp') for n in range(2)]
+    alien_images0 = [pg.image.load(f'images/alien-0{n}.png') for n in range(1,3)]
+    alien_images1 = [pg.image.load(f'images/alien-1{n}.png') for n in range(1,7)]
+    alien_images2 = [pg.image.load(f'images/alien-2{n}.png') for n in range(1,4)]
+    alien_images3 = [pg.image.load(f'images/UFO-Enemy-{n}.png') for n in range(1,4)]
 
     # alien_types = {0: alien_images0, 1 : alien_images1, 2: alien_images2, 3: alien_images3}    
     alien_timers = {0 : Timer(image_list=alien_images0), 
@@ -22,7 +22,7 @@ class Alien(Sprite):
                    2 : Timer(image_list=alien_images2), 
                    3 : Timer(image_list=alien_images3)}    
 
-    alien_explosion_images = [pg.image.load(f'images/explode{n}.png') for n in range(7)]
+    alien_explosion_images = [pg.image.load(f'images/Explosion-{n}.png') for n in range(1,11)]
 
     def __init__(self, settings, screen, type):
         super().__init__()
