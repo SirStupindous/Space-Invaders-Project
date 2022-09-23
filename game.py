@@ -14,34 +14,48 @@ class Game:
     def __init__(self):
         pg.init()
         self.settings = Settings()
-        size = self.settings.screen_width, self.settings.screen_height   # tuple
+        size = self.settings.screen_width, self.settings.screen_height  # tuple
         self.screen = pg.display.set_mode(size=size)
         pg.display.set_caption("Alien Invasion")
 
         self.sound = Sound(bg_music="sounds/startrek.wav")
 
-        self.scoreboard = Scoreboard(game=self)  
+        self.scoreboard = Scoreboard(game=self)
         self.lasers = Lasers(settings=self.settings)
-        self.ship = Ship(game=self, screen=self.screen, settings=self.settings, sound=self.sound, lasers=self.lasers)
-        self.aliens = Aliens(game=self, screen=self.screen, settings=self.settings, lasers=self.lasers, ship=self.ship)
+        self.ship = Ship(
+            game=self,
+            screen=self.screen,
+            settings=self.settings,
+            sound=self.sound,
+            lasers=self.lasers,
+        )
+        self.aliens = Aliens(
+            game=self,
+            screen=self.screen,
+            settings=self.settings,
+            lasers=self.lasers,
+            ship=self.ship,
+        )
         self.settings.initialize_speed_settings()
 
     def reset(self):
-        print('Resetting game...')
+        print("Resetting game...")
         self.lasers.reset()
         self.ship.reset()
         self.aliens.reset()
         # self.scoreboard.reset()
 
     def game_over(self):
-        print('All ships gone: game over!')
+        print("All ships gone: game over!")
         self.sound.gameover()
         pg.quit()
         sys.exit()
 
     def play(self):
         self.sound.play_bg()
-        while True:     # at the moment, only exits in gf.check_events if Ctrl/Cmd-Q pressed
+        while (
+            True
+        ):  # at the moment, only exits in gf.check_events if Ctrl/Cmd-Q pressed
             gf.check_events(settings=self.settings, ship=self.ship)
             self.screen.fill(self.settings.bg_color)
             self.ship.update()
@@ -56,5 +70,5 @@ def main():
     g.play()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
