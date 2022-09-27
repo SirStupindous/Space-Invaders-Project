@@ -11,7 +11,7 @@ class Alien(Sprite):
 
     # alien_images = [pg.image.load(f"images/alien{n}.bmp") for n in range(2)]
 
-    alien_images2 = [pg.image.load(f"images/alien-0{n}.png") for n in range(1, 3)]
+    alien_images2 = [pg.image.load(f"images/alien-0{n}.png") for n in range(1, 4)]
     alien_images1 = [pg.image.load(f"images/alien-1{n}.png") for n in range(1, 7)]
     alien_images0 = [pg.image.load(f"images/alien-2{n}.png") for n in range(1, 4)]
     alien_images3 = [pg.image.load(f"images/UFO-Enemy-{n}.png") for n in range(1, 4)]
