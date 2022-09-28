@@ -25,3 +25,4 @@ class Sound:
         pg.mixer.music.load("sounds/gameover.wav")
         self.play_bg()
         time.sleep(2.8)
+        pg.mixer.music.load("sounds/startrek.wav")

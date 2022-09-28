@@ -47,12 +47,14 @@ class Game:
         self.lasers.reset()
         self.ship.reset()
         self.aliens.reset()
-        # self.scoreboard.reset()
+        self.scoreboard.reset()
 
     def game_over(self):
         print("All ships gone: game over!")
         self.sound.gameover()
+        self.reset()
         self.settings.game_active = False
+        self.sound.play_bg()
 
     def play(self):
         self.sound.play_bg()
