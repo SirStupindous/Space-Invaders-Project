@@ -156,9 +156,11 @@ class Aliens:
     def check_collisions(self):
         collisions = pg.sprite.groupcollide(self.aliens, self.lasers, False, True)
         if collisions:
+            type = None
             for alien in collisions:
                 alien.hit()
-            self.sb.increment_score()
+                type = alien.type
+            self.sb.increment_score(type)
 
     def update(self):
         self.check_fleet_edges()
