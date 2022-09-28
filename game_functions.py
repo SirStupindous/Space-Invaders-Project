@@ -10,7 +10,7 @@ movement = {
 }
 
 
-def check_keydown_events(event, settings, ship):
+def check_keydown_events(event, settings, ship, launch_screen):
     key = event.key
     if key == pg.K_SPACE:
         ship.shooting = True
@@ -27,14 +27,19 @@ def check_keyup_events(event, ship):
     # elif key in movement.keys(): ship.vel = Vector()
 
 
-def check_events(settings, ship):
+def check_events(settings, ship, launch_screen):
     for event in pg.event.get():
         if event.type == pg.QUIT:
             sys.exit()
         elif event.type == pg.KEYDOWN:
-            check_keydown_events(event=event, settings=settings, ship=ship)
+            check_keydown_events(
+                event=event, settings=settings, ship=ship, launch_screen=launch_screen
+            )
         elif event.type == pg.KEYUP:
             check_keyup_events(event=event, ship=ship)
+        elif event.type == pg.MOUSEBUTTONDOWN:
+            mouse_x, mouse_y = pg.mouse.get_pos()
+            settings.game_active = launch_screen.check_play_button(mouse_x, mouse_y)
 
 
 def clamp(posn, rect, settings):

@@ -23,6 +23,8 @@ class Settings:
         self.fleet_direction = 1  # change to a Vector(1, 0) move to the right, and ...
         self.initialize_speed_settings()
 
+        self.game_active = False
+
     def initialize_speed_settings(self):
         self.alien_speed_factor = 1
         self.ship_speed_factor = 3
