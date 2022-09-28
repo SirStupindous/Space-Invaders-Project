@@ -10,7 +10,7 @@ movement = {
 }
 
 
-def check_keydown_events(event, settings, ship, launch_screen):
+def check_keydown_events(event, settings, ship):
     key = event.key
     if key == pg.K_SPACE:
         ship.shooting = True
@@ -32,9 +32,7 @@ def check_events(settings, ship, launch_screen):
         if event.type == pg.QUIT:
             sys.exit()
         elif event.type == pg.KEYDOWN:
-            check_keydown_events(
-                event=event, settings=settings, ship=ship, launch_screen=launch_screen
-            )
+            check_keydown_events(event=event, settings=settings, ship=ship)
         elif event.type == pg.KEYUP:
             check_keyup_events(event=event, ship=ship)
         elif event.type == pg.MOUSEBUTTONDOWN:

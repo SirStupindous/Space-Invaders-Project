@@ -62,6 +62,15 @@ class LaunchScreen:
             color=(GREEN),
         )
 
+        self.score_button = Button(
+            settings=self.settings,
+            screen=self.screen,
+            msg="HIGH SCORES",
+            x=self.settings.screen_width / 2,
+            y=700,
+            color=WHITE,
+        )
+
     def update_aliens_coordinates(self):
         self.alien0.rect.x = self.settings.screen_width / 2 - 100
         self.alien0.rect.y = self.settings.screen_height / 2 - 100
@@ -137,6 +146,7 @@ class LaunchScreen:
         self.alien2.draw()
         self.alien3.draw()
         self.play_button.update()
+        self.score_button.update()
 
     def update(self):
         self.draw()
