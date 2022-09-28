@@ -52,8 +52,7 @@ class Game:
     def game_over(self):
         print("All ships gone: game over!")
         self.sound.gameover()
-        pg.quit()
-        sys.exit()
+        self.settings.game_active = False
 
     def play(self):
         self.sound.play_bg()
