@@ -3,7 +3,7 @@ import pygame as pg
 from settings import Settings
 import game_functions as gf
 
-from laser import Lasers
+from laser import Lasers, LaserType
 from alien import Aliens
 from ship import Ship
 from sound import Sound
@@ -24,36 +24,26 @@ class Game:
         self.sound = Sound(bg_music="sounds/startrek.wav")
 
         self.scoreboard = Scoreboard(game=self)
-        self.lasers = Lasers(settings=self.settings)
-        self.ship = Ship(
-            game=self,
-            screen=self.screen,
-            settings=self.settings,
-            sound=self.sound,
-            lasers=self.lasers,
-        )
-        self.aliens = Aliens(
-            game=self,
-            screen=self.screen,
-            settings=self.settings,
-            lasers=self.lasers,
-            ship=self.ship,
-        )
+        
+        self.ship_lasers = Lasers(settings=self.settings, type=LaserType.SHIP)
+        self.alien_lasers = Lasers(settings=self.settings, type=LaserType.ALIEN)
+
+        self.barriers = Barriers(game=self)
+        self.ship = Ship(game=self)
+        self.aliens = Aliens(game=self)
         self.settings.initialize_speed_settings()
 
         self.launch_screen = LaunchScreen(
             game=self, screen=self.screen, settings=self.settings
         )
 
-        self.barriers = Barriers(game=self)
-
     def reset(self):
         print("Resetting game...")
-        self.lasers.reset()
+        # self.lasers.reset()
         self.barriers.reset()
         self.ship.reset()
         self.aliens.reset()
-        self.scoreboard.reset()
+        # self.scoreboard.reset()
 
     def game_over(self):
         print("All ships gone: game over!")
@@ -63,6 +53,7 @@ class Game:
         self.sound.play_bg()
 
     def play(self):
+        self.launch_screen.draw()
         self.sound.play_bg()
         while (
             True
@@ -77,12 +68,10 @@ class Game:
                 self.ship.update()
                 self.aliens.update()
                 self.barriers.update()
-                self.lasers.update()
+                # self.lasers.update()
                 self.scoreboard.update()
-            else:
-                self.launch_screen.update()
-
-            pg.display.flip()
+                pg.display.flip()
+            
 
 
 def main():

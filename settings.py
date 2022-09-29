@@ -14,6 +14,8 @@ class Settings:
         self.laser_color = 255, 0, 0
         self.lasers_every = 1
 
+        self.aliens_shoot_every = 120    # about every 2 seconds at 60 fps
+
         self.alien0_points = 10
         self.alien1_points = 20
         self.alien2_points = 40

@@ -50,16 +50,16 @@ class LaunchScreen:
         self.settings = settings
 
         self.alien0 = Alien(
-            game=self.game, settings=self.settings, screen=self.screen, type=2
+            game=self.game, type=2
         )
         self.alien1 = Alien(
-            game=self.game, settings=self.settings, screen=self.screen, type=1
+            game=self.game, type=1
         )
         self.alien2 = Alien(
-            game=self.game, settings=self.settings, screen=self.screen, type=0
+            game=self.game, type=0
         )
         self.alien3 = Alien(
-            game=self.game, settings=self.settings, screen=self.screen, type=3
+            game=self.game, type=3
         )
 
         self.play_button = Button(
