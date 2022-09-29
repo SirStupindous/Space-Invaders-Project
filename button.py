@@ -165,6 +165,23 @@ class LaunchScreen:
     def update(self):
         self.draw()
 
+    def read_scores_from_file(self):
+        text = []
+        file = open("high_scores.txt")
+        for line in file:
+            text.append(line)
+
+        x, y = self.settings.screen_width / 2, self.settings.screen_height / 2 - 200
+        font = pg.font.SysFont(None, 50)
+
+        for item in text:
+            item = item[:-1]
+            score = font.render(item, TRUE, WHITE, GRAY)
+            score_rect = score.get_rect()
+            score_rect.center = (x, y)
+            self.screen.blit(score, score_rect)
+            y += 50
+
     def draw_score(self):
         self.screen.fill(GRAY)
 
@@ -177,6 +194,8 @@ class LaunchScreen:
             100,
         )
         self.screen.blit(high_score, high_score_rect)
+
+        self.read_scores_from_file()
 
         self.back_button.update()
 
