@@ -12,9 +12,9 @@ class Settings:
         self.laser_width = 5
         self.laser_height = 30
         self.laser_color = 255, 0, 0
-        self.lasers_every = 1
+        self.lasers_every = 50
 
-        self.aliens_shoot_every = 120  # about every 2 seconds at 60 fps
+        self.aliens_shoot_every = 180  # about every 2 seconds at 60 fps
 
         self.alien0_points = 10
         self.alien1_points = 20
@@ -29,11 +29,12 @@ class Settings:
         self.initialize_speed_settings()
 
         self.game_active = False
+        self.score_screen = False
 
     def initialize_speed_settings(self):
         self.alien_speed_factor = 1
         self.ship_speed_factor = 3
-        self.laser_speed_factor = 3
+        self.laser_speed_factor = 1
 
     def increase_speed(self):
         scale = self.speedup_scale

@@ -62,15 +62,17 @@ class Game:
                 ship=self.ship,
                 launch_screen=self.launch_screen,
             )
-            if self.settings.game_active:
+            if self.settings.game_active and not self.settings.score_screen:
                 self.screen.fill(self.settings.bg_color)
                 self.ship.update()
                 self.aliens.update()
                 self.barriers.update()
                 # self.lasers.update()
                 self.scoreboard.update()
-            else:
+            elif not self.settings.game_active and not self.settings.score_screen:
                 self.launch_screen.update()
+            elif self.settings.score_screen and not self.settings.game_active:
+                self.launch_screen.update_score()
 
             pg.display.flip()
 

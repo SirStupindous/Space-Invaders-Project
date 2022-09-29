@@ -37,7 +37,7 @@ def check_events(settings, ship, launch_screen):
             check_keyup_events(event=event, ship=ship)
         elif event.type == pg.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pg.mouse.get_pos()
-            settings.game_active = launch_screen.check_play_button(mouse_x, mouse_y)
+            launch_screen.check_button(mouse_x, mouse_y)
 
 
 def clamp(posn, rect, settings):

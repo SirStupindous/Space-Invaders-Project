@@ -72,6 +72,15 @@ class LaunchScreen:
             color=WHITE,
         )
 
+        self.back_button = Button(
+            settings=self.settings,
+            screen=self.screen,
+            msg="BACK",
+            x=80,
+            y=30,
+            color=WHITE,
+        )
+
     def update_aliens_coordinates(self):
         self.alien0.rect.x = self.settings.screen_width / 2 - 100
         self.alien0.rect.y = self.settings.screen_height / 2 - 100
@@ -82,9 +91,13 @@ class LaunchScreen:
         self.alien3.rect.x = self.settings.screen_width / 2 - 100
         self.alien3.rect.y = self.settings.screen_height / 2 + 40
 
-    def check_play_button(self, mouse_x, mouse_y):
+    def check_button(self, mouse_x, mouse_y):
         if self.play_button.rect.collidepoint(mouse_x, mouse_y):
-            return True
+            self.settings.game_active = True
+        elif self.score_button.rect.collidepoint(mouse_x, mouse_y):
+            self.settings.score_screen = True
+        elif self.back_button.rect.collidepoint(mouse_x, mouse_y):
+            self.settings.score_screen = False
 
     def draw_words_on_screen(self):
         # Space
@@ -151,3 +164,21 @@ class LaunchScreen:
 
     def update(self):
         self.draw()
+
+    def draw_score(self):
+        self.screen.fill(GRAY)
+
+        # Draws 'High score' onto screen
+        high_score_font = pg.font.SysFont(None, 100)
+        high_score = high_score_font.render("HIGH SCORES", TRUE, WHITE, GRAY)
+        high_score_rect = high_score.get_rect()
+        high_score_rect.center = (
+            self.settings.screen_width / 2,
+            100,
+        )
+        self.screen.blit(high_score, high_score_rect)
+
+        self.back_button.update()
+
+    def update_score(self):
+        self.draw_score()
