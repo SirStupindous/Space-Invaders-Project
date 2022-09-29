@@ -65,7 +65,6 @@ class Ship(Sprite):
             print("SHIP IS HIT !!!!!!!!!!!!!!!!!!!!!")
             self.dying = True
             self.timer = self.timer_explosion
-            self.vel = Vector()
 
     def really_dead(self):
         # # TODO: reduce the ships_left,
