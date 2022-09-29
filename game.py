@@ -53,7 +53,6 @@ class Game:
         self.sound.play_bg()
 
     def play(self):
-        self.launch_screen.draw()
         self.sound.play_bg()
         while (
             True

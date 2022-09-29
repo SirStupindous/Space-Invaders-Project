@@ -161,32 +161,48 @@ class Aliens:
                 self.aliens_lasers.shoot(game=self.game, x=alien.rect.centerx, y=alien.rect.bottom)
             i += 1
 
-    # alien_lasers hitting the ship Or
-    # alien_lasers hitting a barrier or
-    # alien_lasers hitting a ship_lasers
-
-    # ship_lasers hitting an alien or
-    # ship_lasers hitting a barrier or
-    # ship_lasers hitting an aliens_lasers
-
 
     def check_collisions(self):  
+        # ship_lasers hitting an alien
         collisions = pg.sprite.groupcollide(self.aliens, self.ship_lasers, False, True)  
         if collisions:
             for alien in collisions:
                 alien.hit()
+        
+        # ship_lasers hitting a barrier
+        collisions = pg.sprite.groupcollide(self.game.barriers.barriers, self.ship_lasers, False, True)
+        if collisions:
+            for barrier in collisions:
+                barrier.hit()
 
+        # ship_lasers hitting an aliens_lasers
+        # collisions = pg.sprite.groupcollide(self.aliens_lasers.lasers, self.ship_lasers, True, True)
+        # if collisions:
+        #     for alien_laser in collisions:
+        #         alien_laser.hit()
+        #     for ship_laser in collisions:
+        #         ship_laser.hit()
+
+        # alien_lasers hitting the ship
         collisions = pg.sprite.spritecollide(self.ship, self.aliens_lasers.lasers, True)
         if collisions:
             self.ship.hit()
+        
+        # alien_lasers hitting a barrier
+        collisions = pg.sprite.groupcollide(self.game.barriers.barriers, self.aliens_lasers.lasers, False, True)
+        if collisions:
+            for barrier in collisions:
+                barrier.hit()
 
-        # aliens_lasers collide with barrier?
-
-        # ship_lasers collide with barrier?
-
-        # aliens_lasers collide with ship_lasers ?
-
-
+        # alien_lasers hitting a ship_lasers
+        # collisions = pg.sprite.groupcollide(self.aliens_lasers.lasers, self.ship_lasers, True, True)
+        # if collisions:
+        #     for alien_laser in collisions:
+        #         alien_laser.hit()
+        #     for ship_laser in collisions:
+        #         ship_laser.hit()
+        
+        
     def update(self): 
         self.check_fleet_edges()
         self.check_fleet_bottom()
