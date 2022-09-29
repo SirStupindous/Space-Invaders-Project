@@ -9,6 +9,7 @@ from ship import Ship
 from sound import Sound
 from scoreboard import Scoreboard
 from button import LaunchScreen
+from barrier import Barriers
 import sys
 
 
@@ -42,9 +43,12 @@ class Game:
 
         self.launch_screen = LaunchScreen(screen=self.screen, settings=self.settings)
 
+        self.barriers = Barriers(game=self)
+
     def reset(self):
         print("Resetting game...")
         self.lasers.reset()
+        self.barriers.reset()
         self.ship.reset()
         self.aliens.reset()
         self.scoreboard.reset()
@@ -70,6 +74,7 @@ class Game:
                 self.screen.fill(self.settings.bg_color)
                 self.ship.update()
                 self.aliens.update()
+                self.barriers.update()
                 self.lasers.update()
                 self.scoreboard.update()
             else:
