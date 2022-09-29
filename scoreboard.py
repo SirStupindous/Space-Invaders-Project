@@ -42,8 +42,33 @@ class Scoreboard:
         self.score_rect.right = self.screen_rect.right - 20
         self.score_rect.top = 20
 
+    def check_for_high_score(self):
+        text = []
+        file = open("high_scores.txt", "r")
+
+        for line in file:
+            text.append(int(line[3:]))
+
+        file.close()
+        file = open("high_scores.txt", "w")
+
+        for num in text:
+            # new high score
+            if self.score >= num:
+                text.insert(text.index(num), self.score)
+                del text[-1]
+                break
+
+        n = 1
+
+        for num in text:
+            file.write(str(n) + ". " + str(num) + "\n")
+            n += 1
+
     def reset(self):
+        self.check_for_high_score()
         self.score = 0
+        self.prep_score()
         self.update()
 
     def update(self):

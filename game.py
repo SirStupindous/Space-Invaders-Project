@@ -43,12 +43,14 @@ class Game:
         self.barriers.reset()
         self.ship.reset()
         self.aliens.reset()
-        self.scoreboard.reset()
+        # self.scoreboard.reset()
 
     def game_over(self):
         print("All ships gone: game over!")
         self.sound.gameover()
         self.reset()
+        self.scoreboard.reset()
+        self.ship.ships_left = 3
         self.settings.game_active = False
         self.sound.play_bg()
 
