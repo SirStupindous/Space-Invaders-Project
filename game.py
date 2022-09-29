@@ -41,7 +41,9 @@ class Game:
         )
         self.settings.initialize_speed_settings()
 
-        self.launch_screen = LaunchScreen(screen=self.screen, settings=self.settings)
+        self.launch_screen = LaunchScreen(
+            game=self, screen=self.screen, settings=self.settings
+        )
 
         self.barriers = Barriers(game=self)
 

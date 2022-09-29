@@ -44,14 +44,23 @@ class Button:
 
 
 class LaunchScreen:
-    def __init__(self, screen, settings):
+    def __init__(self, game, screen, settings):
+        self.game = game
         self.screen = screen
         self.settings = settings
 
-        self.alien0 = Alien(settings=self.settings, screen=self.screen, type=2)
-        self.alien1 = Alien(settings=self.settings, screen=self.screen, type=1)
-        self.alien2 = Alien(settings=self.settings, screen=self.screen, type=0)
-        self.alien3 = Alien(settings=self.settings, screen=self.screen, type=3)
+        self.alien0 = Alien(
+            game=self.game, settings=self.settings, screen=self.screen, type=2
+        )
+        self.alien1 = Alien(
+            game=self.game, settings=self.settings, screen=self.screen, type=1
+        )
+        self.alien2 = Alien(
+            game=self.game, settings=self.settings, screen=self.screen, type=0
+        )
+        self.alien3 = Alien(
+            game=self.game, settings=self.settings, screen=self.screen, type=3
+        )
 
         self.play_button = Button(
             settings=self.settings,

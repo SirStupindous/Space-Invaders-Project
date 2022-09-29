@@ -28,7 +28,7 @@ class Alien(Sprite):
         pg.image.load(f"images/Explosion-{n}.png") for n in range(1, 11)
     ]
 
-    def __init__(self, settings, screen, type):
+    def __init__(self, game, settings, screen, type):
         super().__init__()
         self.screen = screen
         self.settings = settings
@@ -39,6 +39,7 @@ class Alien(Sprite):
         self.type = type
 
         self.dying = self.dead = False
+        self.sb = game.scoreboard
 
         # self.timer_normal = Timer(image_list=self.alien_images)
         # self.timer_normal = Timer(image_list=self.alien_types[type])
@@ -63,6 +64,7 @@ class Alien(Sprite):
         if not self.dying:
             self.dying = True
             self.timer = self.timer_explosion
+            self.sb.increment_score(self.type)
 
     def update(self):
         if self.timer == self.timer_explosion and self.timer.is_expired():
@@ -82,7 +84,7 @@ class Alien(Sprite):
 
 class Aliens:
     def __init__(self, game, screen, settings, lasers: Lasers, ship):
-        self.model_alien = Alien(settings=settings, screen=screen, type=1)
+        self.model_alien = Alien(game=game, settings=settings, screen=screen, type=1)
         self.game = game
         self.sb = game.scoreboard
         self.aliens = Group()
@@ -114,7 +116,9 @@ class Aliens:
             type = row_number // 2
         else:
             return
-        alien = Alien(settings=self.settings, screen=self.screen, type=type)
+        alien = Alien(
+            game=self.game, settings=self.settings, screen=self.screen, type=type
+        )
         alien_width = alien.rect.width
 
         alien.x = alien_width + 1 * alien_width * alien_number
@@ -156,11 +160,8 @@ class Aliens:
     def check_collisions(self):
         collisions = pg.sprite.groupcollide(self.aliens, self.lasers, False, True)
         if collisions:
-            type = None
             for alien in collisions:
                 alien.hit()
-                type = alien.type
-            self.sb.increment_score(type)
 
     def update(self):
         self.check_fleet_edges()
