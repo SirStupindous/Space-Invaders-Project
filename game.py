@@ -24,7 +24,7 @@ class Game:
         self.sound = Sound(bg_music="sounds/startrek.wav")
 
         self.scoreboard = Scoreboard(game=self)
-        
+
         self.ship_lasers = Lasers(settings=self.settings, type=LaserType.SHIP)
         self.alien_lasers = Lasers(settings=self.settings, type=LaserType.ALIEN)
 
@@ -69,8 +69,10 @@ class Game:
                 self.barriers.update()
                 # self.lasers.update()
                 self.scoreboard.update()
-                pg.display.flip()
-            
+            else:
+                self.launch_screen.update()
+
+            pg.display.flip()
 
 
 def main():
