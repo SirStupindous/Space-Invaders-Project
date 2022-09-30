@@ -9,10 +9,11 @@ from sys import exit
 
 class Ship(Sprite):
     ship_images = [
-        pg.transform.rotozoom(pg.image.load(f"images/Space-Ship-1.png"), 0, 1.0)
+        pg.transform.rotozoom(pg.image.load(f"images/Space-Ship-{n}.png"), 0, 2.0)
+        for n in range(1, 7)
     ]
     ship_explosion_images = [
-        pg.transform.rotozoom(pg.image.load(f"images/Explosion-{n}.png"), 0, 1.0)
+        pg.transform.rotozoom(pg.image.load(f"images/Explosion-{n}.png"), 0, 2.0)
         for n in range(1, 11)
     ]
 
@@ -90,6 +91,6 @@ class Ship(Sprite):
     def draw(self):
         image = self.timer.image()
         rect = image.get_rect()
-        rect.left, rect.top = self.rect.left, self.rect.top
+        rect.left, rect.top = self.rect.left, self.rect.top - 25
         self.screen.blit(image, rect)
         # self.screen.blit(self.image, self.rect)

@@ -3,7 +3,7 @@ from pygame.sprite import Sprite, Group
 
 
 class Barrier(Sprite):
-    color = 255, 0, 0
+    color = 203, 96, 21
     black = 0, 0, 0
 
     def __init__(self, game, rect):
@@ -11,6 +11,15 @@ class Barrier(Sprite):
         self.screen = game.screen
         self.rect = rect
         self.settings = game.settings
+        self.hit_count = 0
+
+        self.images = [
+            pg.transform.scale2x(pg.image.load("images/Barrier-1.png")),
+            pg.transform.scale2x(pg.image.load("images/Barrier-2.png")),
+            pg.transform.scale2x(pg.image.load("images/Barrier-3.png")),
+            pg.transform.scale2x(pg.image.load("images/Barrier-4.png")),
+            pg.transform.scale2x(pg.image.load("images/Barrier-5.png")),
+        ]
 
         # self.settings = game.settings
         # self.image = pg.image.load('images/alien0.bmp')
@@ -19,19 +28,17 @@ class Barrier(Sprite):
         # self.x = float(self.rect.x)
 
     def hit(self):
-        pass
+        self.hit_count += 1
 
     def update(self):
         self.draw()
 
     def draw(self):
-        pg.draw.rect(self.screen, Barrier.color, self.rect, 0, 20)
-        pg.draw.circle(
-            self.screen,
-            self.settings.bg_color,
-            (self.rect.centerx, self.rect.bottom),
-            self.rect.width / 6,
-        )
+        if self.hit_count > 4:
+            return
+        else:
+            rect = self.rect
+            self.screen.blit(self.images[self.hit_count], rect)
 
 
 class Barriers:
@@ -57,7 +64,10 @@ class Barriers:
 
     def update(self):
         for barrier in self.barriers:
-            barrier.update()
+            if barrier.hit_count < 5:
+                barrier.update()
+            else:
+                self.barriers.remove(barrier)
 
     # def draw(self):
     #     for barrier in self.barriers: barrier.draw()
