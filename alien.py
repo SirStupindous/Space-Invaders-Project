@@ -15,7 +15,7 @@ class Alien(Sprite):
     alien_images2 = [pg.image.load(f"images/alien-0{n}.png") for n in range(1, 4)]
     alien_images1 = [pg.image.load(f"images/alien-1{n}.png") for n in range(1, 7)]
     alien_images0 = [pg.image.load(f"images/alien-2{n}.png") for n in range(1, 4)]
-    alien_images3 = [pg.image.load(f"images/UFO-Enemy-{n}.png") for n in range(1, 4)]
+    alien_images3 = [pg.image.load(f"images/UFO-Enemy-{n}.png") for n in range(1, 5)]
 
     # alien_types = {0: alien_images0, 1 : alien_images1, 2: alien_images2, 3: alien_images3}
     alien_timers = {
@@ -236,3 +236,4 @@ class Aliens:
     def draw(self):
         for alien in self.aliens.sprites():
             alien.draw()
+

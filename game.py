@@ -5,6 +5,7 @@ import game_functions as gf
 
 from laser import Lasers, LaserType
 from alien import Aliens
+from ufo import UFO
 from ship import Ship
 from sound import Sound
 from scoreboard import Scoreboard
@@ -31,6 +32,7 @@ class Game:
         self.barriers = Barriers(game=self)
         self.ship = Ship(game=self)
         self.aliens = Aliens(game=self)
+        self.ufo = UFO(game=self, type=3)
         self.settings.initialize_speed_settings()
 
         self.launch_screen = LaunchScreen(
@@ -43,6 +45,7 @@ class Game:
         self.barriers.reset()
         self.ship.reset()
         self.aliens.reset()
+        self.ufo.reset()
         # self.scoreboard.reset()
 
     def game_over(self):
@@ -68,6 +71,7 @@ class Game:
                 self.screen.fill(self.settings.bg_color)
                 self.ship.update()
                 self.aliens.update()
+                self.ufo.update()
                 self.barriers.update()
                 # self.lasers.update()
                 self.scoreboard.update()

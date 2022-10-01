@@ -6,7 +6,7 @@ class Settings:
         # Screen settings
         self.screen_width = 1200
         self.screen_height = 800
-        self.bg_color = (150, 150, 150)
+        self.bg_color = (58, 58, 58)
 
         # # TODO: test laser with a really wide laser
         self.laser_width = 5
@@ -33,6 +33,7 @@ class Settings:
 
     def initialize_speed_settings(self):
         self.alien_speed_factor = 1
+        self.ufo_speed_factor = 1
         self.ship_speed_factor = 3
         self.laser_speed_factor = 1
 
