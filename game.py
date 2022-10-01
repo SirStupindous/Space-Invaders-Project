@@ -32,7 +32,7 @@ class Game:
         self.barriers = Barriers(game=self)
         self.ship = Ship(game=self)
         self.aliens = Aliens(game=self)
-        self.ufo = UFO(game=self, type=3)
+        self.ufo = UFO(game=self, type=3, color=(255, 0, 255))
         self.settings.initialize_speed_settings()
 
         self.launch_screen = LaunchScreen(

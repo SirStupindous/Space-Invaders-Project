@@ -1,3 +1,5 @@
+from random import randint
+
 class Settings:
     """A class to store all settings for Alien Invasion."""
 
@@ -20,6 +22,7 @@ class Settings:
         self.alien1_points = 20
         self.alien2_points = 40
         self.alien3_points = 0
+        self.ufo_points = randint(100, 500)
 
         # # TODO: set a ship_limit of 3
         self.ship_limit = 3  # total ships allowed in game before game over
