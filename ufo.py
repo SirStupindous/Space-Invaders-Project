@@ -28,92 +28,101 @@ class UFO:
         self.x = float(self.rect.x)
         self.type = type
         self.active = False
-        
 
         self.dying = self.dead = False
         self.sb = game.scoreboard
-
 
         self.timer_normal = Alien.alien_timers[self.type]
         self.timer_explosion = Timer(
             image_list=Alien.alien_explosion_images, is_loop=False
         )
         self.timer = self.timer_normal
+        self.spawnTimer = randint(1000, 3000)
 
-    # create a countdown timer that counts down the timer and then spawns the ufo
-    # the countdown timer should be a random number between 10 and 30 seconds
-    # if the timer reaches zero, the ufo is spawned and the timer is reset
-    # if the ufo is shot, the timer is reset
-    # if the ufo reaches the right side of the screen, the timer is reset
-    # if the ufo is alive, set self.active to True
-    # if the ufo is dead, set self.active to False
-
-    # def countdown(self):
-    #     self.timer -= 1
-    #     if self.timer == 0:
-    #         self.spawn()
-    #         self.timer = randint(10, 30)
 
     # create a countdown function that counts down the timer and then sets self.active to True
     # the countdown timer should be a random number between 10 and 30 seconds
-
     def countdown(self):
-        new_timer = randint(10, 30)
-        new_timer -= 1
-        if new_timer == 0:
+        self.spawnTimer -= 1
+        if self.spawnTimer <= 0:
+            print("Spawn timer reached 0")
+            self.active = True
             self.spawn()
 
 
     def spawn(self):
-        self.active = True
-        self.x = randint(0, self.screen.right)
+        self.x = 0
         self.rect.x = self.x
+        # if self.active == True:
         print("UFO spawned")
         self.update()
+
 
     # create a function called check_edges that checks if the ufo has reached the right side of the screen
     # if the ufo has reached the right side of the screen, remove the ufo and reset the timer
     # if the ufo has not reached the right side of the screen, move the ufo
     def check_edges(self):
         if self.rect.right >= self.screen.get_rect().right:
-            return True
-        else:
-            return False
-    
-    # def check_edges(self):
-    #     if self.rect.right >= self.screen.right or self.rect.left <= 0:
-    #         return True
-    #     return False
+            print("UFO reached right side of screen and will be reset")
+            # self.active = False
+            self.reset()
+            
+
+    # create a function called check_collisions that checks if the player's laser has hit the ufo
+    # if the player's laser has hit the ufo, call the hit function
+    def check_collisions(self, lasers):
+        for laser in lasers:
+            if laser.rect.colliderect(self.rect):
+                self.hit()
+
 
     def hit(self):
-        self.score_displayed = True
-        self.sb.score += self.score
-        print("UFO hit")
-        self.reset()
-
-    def move(self):
-        self.x += self.settings.ufo_speed_factor
-        self.rect.x = self.x
+        # if the udo is hit by the player's laser, set the ufo to dying
+        # if the ufo is dying, update the explosion timer
+        # if the explosion timer has finished, set the ufo to dead
+        # if the ufo is dead, reset the ufo
+        if self.active == True:
+            self.dying = True
+            self.timer = self.timer_explosion
+            self.timer.reset()
+            self.sb.score += randint(100, 300)
+            print("UFO HIT!!! You received a bonus score of " + str(self.sb.score) + " points")
+            self.reset()
 
 
     # create a reset function
     def reset(self):
         print("UFO reset")
         self.active = False
-        self.score = randint(100, 300)
-        self.score_displayed = False
-        self.score_display_time = 0
-        self.score_display_time_limit = 4
+        self.rect.x = 0 # self.screen.get_rect().left
+        self.spawnTimer = randint(1000, 3000)
         self.countdown()
-        
-        
+
 
     def update(self):
-        self.draw()
-        self.move()
-        
-        if self.check_edges():
-            self.reset()
+        # if the ufo is active, move the ufo from the left side of the screen to the right side of the screen
+        # if the ufo is not active, countdown the timer and then spawn the ufo
+        if self.active == True:
+            self.x += self.settings.ufo_speed_factor
+            self.rect.x = self.x
+            self.draw()
+            self.check_edges()
+            # self.check_collisions(self.ship_lasers.lasers)
+        else:
+            self.countdown()
+
+        # if the ufo is dying, update the explosion timer
+        if self.timer == self.timer_explosion and self.timer.is_expired():
+            self.dying = True
+        if self.dying:
+            self.timer_explosion.update()
+            # if the explosion timer has finished, set the ufo to dead
+            if self.timer_explosion.finished:
+                self.dead = True
+                # self.active = False
+                self.dying = False
+                self.reset()
+
 
     def draw(self):
         image = self.timer.image()

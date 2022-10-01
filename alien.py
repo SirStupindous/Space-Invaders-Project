@@ -6,12 +6,6 @@ from timer import Timer
 
 
 class Alien(Sprite):
-    # alien_images = []
-    # for n in range(2):
-    #     alien_images.append(pg.image.load(f'images/alien{n}.bmp'))
-
-    # alien_images = [pg.image.load(f"images/alien{n}.bmp") for n in range(2)]
-
     alien_images2 = [pg.image.load(f"images/alien-0{n}.png") for n in range(1, 4)]
     alien_images1 = [pg.image.load(f"images/alien-1{n}.png") for n in range(1, 7)]
     alien_images0 = [pg.image.load(f"images/alien-2{n}.png") for n in range(1, 4)]
@@ -41,9 +35,6 @@ class Alien(Sprite):
 
         self.dying = self.dead = False
         self.sb = game.scoreboard
-
-        # self.timer_normal = Timer(image_list=self.alien_images)
-        # self.timer_normal = Timer(image_list=self.alien_types[type])
 
         self.timer_normal = Alien.alien_timers[self.type]
         self.timer_explosion = Timer(
@@ -89,9 +80,6 @@ class Aliens:
         self.game = game
         self.sb = game.scoreboard
         self.aliens = Group()
-
-        # self.ship_lasers = game.ship.lasers.lasers    # a laser Group
-        # self.aliens_lasers = Lasers(settings=game.settings)
 
         self.ship_lasers = game.ship_lasers.lasers  # a laser Group
         self.aliens_lasers = game.alien_lasers
@@ -193,12 +181,12 @@ class Aliens:
                 barrier.hit()
 
         # ship_lasers hitting an aliens_lasers
-        # collisions = pg.sprite.groupcollide(self.aliens_lasers.lasers, self.ship_lasers, True, True)
-        # if collisions:
-        #     for alien_laser in collisions:
-        #         alien_laser.hit()
-        #     for ship_laser in collisions:
-        #         ship_laser.hit()
+        collisions = pg.sprite.groupcollide(self.aliens_lasers.lasers, self.ship_lasers, True, True)
+        if collisions:
+            for alien_laser in collisions:
+                alien_laser.remove()
+            for ship_laser in collisions:
+                ship_laser.remove()
 
         # alien_lasers hitting the ship
         collisions = pg.sprite.spritecollide(self.ship, self.aliens_lasers.lasers, True)
@@ -214,12 +202,12 @@ class Aliens:
                 barrier.hit()
 
         # alien_lasers hitting a ship_lasers
-        # collisions = pg.sprite.groupcollide(self.aliens_lasers.lasers, self.ship_lasers, True, True)
-        # if collisions:
-        #     for alien_laser in collisions:
-        #         alien_laser.hit()
-        #     for ship_laser in collisions:
-        #         ship_laser.hit()
+        collisions = pg.sprite.groupcollide(self.aliens_lasers.lasers, self.ship_lasers, True, True)
+        if collisions:
+            for alien_laser in collisions:
+                alien_laser.remove()
+            for ship_laser in collisions:
+                ship_laser.remove()
 
     def update(self):
         self.check_fleet_edges()
