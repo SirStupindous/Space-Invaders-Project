@@ -59,7 +59,6 @@ class Game:
 
     def play(self):
         self.sound.play_bg()
-        switch_one, switch_two, switch_three = False, False, False
 
         while (
             True
@@ -70,6 +69,7 @@ class Game:
                 launch_screen=self.launch_screen,
             )
 
+            self.sound.speed_up(switch1, switch2, switch3)
 
             if self.settings.game_active and not self.settings.score_screen:
                 self.screen.fill(self.settings.bg_color)
