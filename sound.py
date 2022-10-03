@@ -6,6 +6,7 @@ import time
 class Sound:
     def __init__(self, bg_music):
         pg.mixer.init()
+        self.bg = bg_music
         pg.mixer.music.load(bg_music)
         pg.mixer.music.set_volume(0.1)
         alienlaser_sound = pg.mixer.Sound("sounds/alienlaser.wav")

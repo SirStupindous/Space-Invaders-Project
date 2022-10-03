@@ -1,5 +1,6 @@
 from random import randint
 
+
 class Settings:
     """A class to store all settings for Alien Invasion."""
 
@@ -27,7 +28,7 @@ class Settings:
         # # TODO: set a ship_limit of 3
         self.ship_limit = 3  # total ships allowed in game before game over
 
-        self.fleet_drop_speed = 1
+        self.fleet_drop_speed = 2
         self.fleet_direction = 1  # change to a Vector(1, 0) move to the right, and ...
         self.initialize_speed_settings()
 

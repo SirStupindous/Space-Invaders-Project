@@ -89,6 +89,7 @@ class Aliens:
         self.shoot_requests = 0
         self.ship = game.ship
         self.create_fleet()
+        self.size = len(self.aliens.sprites())
 
     def get_number_aliens_x(self, alien_width):
         available_space_x = self.settings.screen_width - 6 * alien_width
@@ -181,7 +182,9 @@ class Aliens:
                 barrier.hit()
 
         # ship_lasers hitting an aliens_lasers
-        collisions = pg.sprite.groupcollide(self.aliens_lasers.lasers, self.ship_lasers, True, True)
+        collisions = pg.sprite.groupcollide(
+            self.aliens_lasers.lasers, self.ship_lasers, True, True
+        )
         if collisions:
             for alien_laser in collisions:
                 alien_laser.remove()
@@ -202,7 +205,9 @@ class Aliens:
                 barrier.hit()
 
         # alien_lasers hitting a ship_lasers
-        collisions = pg.sprite.groupcollide(self.aliens_lasers.lasers, self.ship_lasers, True, True)
+        collisions = pg.sprite.groupcollide(
+            self.aliens_lasers.lasers, self.ship_lasers, True, True
+        )
         if collisions:
             for alien_laser in collisions:
                 alien_laser.remove()
@@ -224,4 +229,3 @@ class Aliens:
     def draw(self):
         for alien in self.aliens.sprites():
             alien.draw()
-

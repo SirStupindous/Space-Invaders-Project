@@ -59,6 +59,8 @@ class Game:
 
     def play(self):
         self.sound.play_bg()
+        switch_one, switch_two, switch_three = False, False, False
+
         while (
             True
         ):  # at the moment, only exits in gf.check_events if Ctrl/Cmd-Q pressed
@@ -67,6 +69,8 @@ class Game:
                 ship=self.ship,
                 launch_screen=self.launch_screen,
             )
+
+
             if self.settings.game_active and not self.settings.score_screen:
                 self.screen.fill(self.settings.bg_color)
                 self.ship.update()
